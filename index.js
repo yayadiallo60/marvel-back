@@ -10,8 +10,8 @@ const app = express();
 app.use(formidable());
 app.use(cors());
 
-const apikey = process.env.APIKEY;
-const publicKey = process.env.PUBLICKEY;
+const apikey = process.env.API_KEY;
+const publicKey = process.env.PUBLIC_KEY;
 
 app.get("/characters", async (req, res) => {
   const ts = uid2(16);
