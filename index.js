@@ -17,10 +17,12 @@ app.get("/characters", async (req, res) => {
   const ts = uid2(16);
   const hash = md5(ts + apikey + publicKey);
   const limit = 100;
+  const { offset } = req.query;
+  console.log(offset);
 
   try {
     const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/characters?limit=${limit}&ts=${ts}&apikey=${publicKey}&hash=${hash}`
+      `http://gateway.marvel.com/v1/public/characters?limit=${limit}&offset=${offset}&ts=${ts}&apikey=${publicKey}&hash=${hash}`
     );
     // console.log(response.data);
     res.status(200).json(response.data.data);
@@ -67,10 +69,11 @@ app.get("/comics", async (req, res) => {
   const ts = uid2(16);
   const hash = md5(ts + apikey + publicKey);
   const limit = 100;
+  const { offset } = req.query;
 
   try {
     const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/comics?limit=${limit}&ts=${ts}&apikey=${publicKey}&hash=${hash}`
+      `http://gateway.marvel.com/v1/public/comics?limit=${limit}?offset=${offset}&ts=${ts}&apikey=${publicKey}&hash=${hash}`
     );
     console.log(response.data);
     res.status(200).json(response.data.data);
